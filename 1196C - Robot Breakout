@@ -1,0 +1,46 @@
+#include<bits/stdc++.h>
+using namespace std;
+int main()
+{
+    int q;
+    cin>>q;
+    while(q--)
+    {
+        int n;
+        cin>>n;
+        multimap<int,int>mp;
+        int x[n],y[n],f[n][4];
+        for(int i=0;i<n;i++)
+        {
+            cin>>x[i]>>y[i];
+            for(int j=0;j<4;j++)
+                {
+                    cin>>f[i][j];
+                    mp.insert(make_pair(j,i));
+                }
+        }
+        int maxx=100000;
+        int maxy=100000;
+        int miny=-100000;
+        int minx=-100000;
+        for(int i=0;i<n;i++)
+        {
+            for(int j=0;j<4;j++)
+            {
+                if(j==1&&f[i][j]==0&&maxy>=y[i])
+                    maxy=y[i];
+                else if(j==3&&f[i][j]==0&&miny<=y[i])
+                    miny=y[i];
+                else if(j==2&&f[i][j]==0&&maxx>=x[i])
+                    maxx=x[i];
+                else if(j==0&&f[i][j]==0&&minx<=x[i])
+                    minx=x[i];
+            }
+        }
+        if(minx>maxx||miny>maxy)
+            cout<<"0"<<endl;
+        else
+            cout<<"1 "<<maxx<<" "<<maxy<<endl;
+
+    }
+}
